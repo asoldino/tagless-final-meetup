@@ -42,13 +42,13 @@ class DeviceService[F[_] : Effect](visualisationService: VisualisationAlgebra[F]
   def getNavigationCoordinates(coords: VisualisationAlgebra[F]#Coords): NavigationAlgebra[F]#Coords = (coords._1, coords._2)
 
   /**
-    * This will allocate a monad every time it is invoked
+    * Since this is a def, it will allocate a new Effect every time it is invoked
     *
     * @param visTile
     * @param navTile
     * @return
     */
-  def drawToScreen(visTile: Tile, navTile: Tile): F[Unit] = Monad[F].pure {
+  def drawToScreen(visTile: Tile, navTile: Tile): F[Unit] = Effect[F].delay {
     logger.info("====================================================================================")
     logger.info("+  Visualisation                                 +   Navigation                    +")
     logger.info("+==================================================================================+")

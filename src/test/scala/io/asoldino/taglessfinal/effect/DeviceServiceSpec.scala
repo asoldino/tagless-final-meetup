@@ -120,6 +120,11 @@ class DeviceServiceSpec extends FlatSpec with Matchers {
     override def handleErrorWith[A](fa: Future[A])(f: Throwable => Future[A]): Future[A] = ???
   }
 
+  /**
+    * The reason why Future is not suitable is visible if you run this test. First log will be
+    * Error, please restart the device or call customer care!
+    * This happens because Future control flow starts immediately in Scala
+    */
   it should "execute all the logic" in {
     import io.asoldino.taglessfinal.enhanced.EnhancedVisualisationAlgebra
 
